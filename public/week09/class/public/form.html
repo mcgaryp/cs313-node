@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Rock Paper Scissors</title>
+</head>
+
+<body>
+   <div class="container">
+
+      <div class="row">
+         <div class="col">
+
+            <form action="/game" method="GET">
+
+               <div class="row"><label for="name">Enter your name</label>
+                  <input id="name" ype="text" name="name">
+               </div>
+
+
+               <div class="row"><label for="weapon">Select your weapon</label>
+                  <select id="weapon" name="weapon">
+                     <option value="rock">Rock</option>
+                     <option value="paper">Paper</option>
+                     <option value="scissors">Scissors</option>
+                  </select>
+               </div>
+
+               <div class="row">
+                  <button type="submit">Play Game</button>
+               </div>
+
+            </form>
+         </div>
+      </div>
+   </div>
+</body>
+
+</html>
