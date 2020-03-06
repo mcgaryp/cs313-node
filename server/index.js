@@ -6,7 +6,7 @@ app.set('port', process.env.PORT || 8000)
    .set('views', __dirname + '/views')
    .set('view engine', 'ejs')
    .get('/', (req, res) => {
-      res.sendFile('index.html', { root: '../public' })
+      res.sendFile('index.html', { root: '/public' })
    })
 
    .listen(app.get('port'), function () {
