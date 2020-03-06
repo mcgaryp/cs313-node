@@ -2,13 +2,8 @@ const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 8000
 
-express()
-  .use(express.static(path.join(__dirname, 'public')))
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/form', { weight: "", type: "" }))
 
-  // GET url format/math?operator=sum&operands=1&operands=2
   .get('/mail', (req, res) => {
     var weight = ""
     var type = ""
@@ -47,24 +42,8 @@ express()
       weight = req.query.weight
       res.render('pages/form', { weight: weight, type: type })
     }
-  })
-
-  // .get('/mail_service', (req, res) => {
-  //   res.set('Content-Type', 'application/json')
-  //   switch (req.query.operator) {
-  //     case "sum":
-  //       let sum = parseInt(req.query.operand1) + parseInt(req.query.operand2)
-  //       res.send(JSON.stringify({ result: sum }))
-  //       console.log(sum)
-  //       break
-  //     default:
-  //       console.log("YOURE LOTS FALIURE")
-  //       break
-  //   }
-  // })
 
   .listen(PORT, () => console.log(`Listening on ${PORT}`))
-
 
 function letterStamped(lbs) {
   var price = 0.55
