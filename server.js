@@ -15,10 +15,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.set('views', __dirname + '/views')
 app.set('view engine', 'ejs')
 
-// app.get('*', (req, res) => {
-//       // res.render('./public/project/index.h')
-//    })
-
 app.get('/', (req, res) => {
    res.render('./index', load)
 })

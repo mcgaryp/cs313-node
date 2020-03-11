@@ -1,14 +1,18 @@
-var params = {
+var param = {
    weeks: [
       {
          url: './week09/assign',
-         week: 'Week09'
+         week: 'Week09 Assign'
       },
       {
-         url: './views/pages/week10/',
-         week: 'Week10'
+         url: './week10/team',
+         week: 'Week10 Team'
+      },
+      {
+         url: './week10/assign',
+         week: 'Week10 Assign'
       }
    ]
 }
 
-module.exports = params
+module.exports = param
