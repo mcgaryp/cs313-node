@@ -1,25 +1,26 @@
-const express = require('express');
-var app = express();
+const express = require('express')
+const router = require('./router')
+const load = require('./load')
+const app = express()
+const port = process.env.PORT || 8000
+const bodyParser = require('body-parser')
 
-app.set('port', process.env.PORT || 8000)
-   .use(express.static(__dirname + '/public'))
-   .set('views', __dirname + '/views')
-   .set('view engine', 'ejs')
-   .get('/', load)
-   .listen(app.get('port'), function () {
-      console.log('Listening on port: ' + app.get('port'))
-   })
+app.set('port', port)
 
-function load(request, response) {
-   var params = {
-      weeks: [{
-         week: "Week 9",
-         url: "../../week09/assign/index.js"
-      },
-      {
-         week: "Week 10",
-         url: "../../week10/index.html"
-      }]
-   }
-   response.render('pages/index', params)
-}
+app.use(express.static(__dirname + '/api'))
+app.use(router)
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
+app.set('views', __dirname + '/views')
+app.set('view engine', 'ejs')
+
+// app.get('*', (req, res) => {
+//       // res.render('./public/project/index.h')
+//    })
+
+app.get('/', (req, res) => {
+   res.render('./index', load)
+})
+
+app.listen(port)
