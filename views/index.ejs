@@ -11,11 +11,20 @@
 
 <body>
 
-   <% for (var i = 0; i < weeks.length; i++) { %>
-      <a class="btn btn-primary" href="<%= weeks[i].url %>">
-         <%= weeks[i].week %>
-      </a>
-   <% } %>
+   <div class="container">
+      <div class="row justify-content-center">
+         <h1>CS 313 Part 2!</h1>
+      </div>
+
+      <div class="row justify-content-center">
+         <% for (var i = 0; i < weeks.length; i++) { %>
+         <div class="col">
+            <a class="btn btn-primary" href="<%= weeks[i].url %>">
+               <%= weeks[i].week %>
+            </a></div>
+         <% } %>
+      </div>
+   </div>
 
 
    <!-- Scripts -->

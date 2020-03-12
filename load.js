@@ -11,6 +11,10 @@ var param = {
       {
          url: './week10/assign',
          week: 'Week10 Assign'
+      },
+      {
+         url: './week10/class',
+         week: 'Week 10 Class'
       }
    ]
 }
