@@ -11,8 +11,29 @@
 
 <body>
 
-   <h1>Team Activity 10</h1>
-   
+   <div class="container">
+
+      <div class="row justify-content-center">
+         <h1>Team Activity 10</h1>
+      </div>
+      <div class="row justify-content-center">
+         <form action="./getPerson">
+            <div class="form-group">
+
+               <div class="row pb-3">
+                  <label class="col" for="number">Select a number from 1 - 6</label>
+                  <input class="col"type="number" id="number" value="" name="id" required>
+               </div>
+
+               <div class="row justify-content-center">
+               	<button type="submit" class="btn btn-success">Go!</button>
+               </div>
+
+            </div>
+         </form>
+      </div>
+
+   </div>
 
    <!-- Scripts -->
    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

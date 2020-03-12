@@ -32,3 +32,6 @@ INSERT INTO week10_team_parentchild (parent_id, child_id) VALUES ((SELECT id FRO
 INSERT INTO week10_team_parentchild (parent_id, child_id) VALUES ((SELECT id FROM week10_team_person WHERE first_name = 'Dustin'), (SELECT id from week10_team_person WHERE first_name = 'Ashley'));
 INSERT INTO week10_team_parentchild (parent_id, child_id) VALUES ((SELECT id FROM week10_team_person WHERE first_name = 'Heather'), (SELECT id from week10_team_person WHERE first_name = 'Madalyn'));
 INSERT INTO week10_team_parentchild (parent_id, child_id) VALUES ((SELECT id FROM week10_team_person WHERE first_name = 'Dustin'), (SELECT id from week10_team_person WHERE first_name = 'Madalyn'));
+
+SELECT * FROM week10_team_parentchild;
+SELECT * FROM week10_team_person;
