@@ -28,8 +28,12 @@
       </div>
 
       <div class="row">
-         <h3>Results</h3>
-         <%= books %>
+         <h3 class="col">Results</h3>
+         <% for (var i = 0; i < books.length; i++) { %>
+            <div class="col">
+               <p><%= books[i].title%></p>
+            </div>
+         <% } %>
       </div>
 
    </div>
