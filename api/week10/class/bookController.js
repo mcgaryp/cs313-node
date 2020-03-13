@@ -3,12 +3,12 @@ var bookModel = require('./bookModel.js');
 function handleBookList(request, response) {
 	console.log("Returning the book list");
 
-	bookModel.getAllBooks(function (error, result) {
-		if (error || result == null || result.length <= 0) {
+	bookModel.getAllBooks(function (error, data) {
+		if (error || data == null || data.length <= 0) {
 			response.status(500).json({ success: false, data: error })
 			return
 		}
-		response.render('./pages/week10/class', { books: result })
+		response.render('./pages/week10/class', { books: data })
 	});
 }
 
@@ -19,12 +19,12 @@ function handleSingleBook(request, response) {
 		console.log("Returning details for book: " + id)
 
 		bookModel.getBook(id, null, (error, data) => {
-			if (error || result == null || result.length <= 0) {
+			if (error || data == null || data.length <= 0) {
 				response.status(500).json({ success: false, data: error })
 				return
 			}
 
-			response.render('./pages/week10/class', { books: result })
+			response.render('./pages/week10/class', { books: data })
 		})
 		return
 	}
@@ -33,12 +33,12 @@ function handleSingleBook(request, response) {
 	console.log("Returning details for book: " + title)
 
 	bookModel.getBook(null, title, (error, data) => {
-		if (error || result == null || result.length <= 0) {
+		if (error || data == null || data.length <= 0) {
 			response.status(500).json({ success: false, data: error })
 			return
 		}
 
-		response.render('./pages/week10/class', { books: result })
+		response.render('./pages/week10/class', { books: data })
 	})
 }
 
