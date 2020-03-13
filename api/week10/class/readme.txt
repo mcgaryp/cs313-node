@@ -18,9 +18,9 @@ Making it better:
       ✅6. Add code so that the json object isn't just printed to the screen, but so the data formatted in a professional way
    
    Let's take out the hard-coded json
-      7. Use what you learned in your reading and team activity this week to put this book data into a local database, and modify your code so that you get the data from the db, instead of a hard-coded json.
+      ✅7. Use what you learned in your reading and team activity this week to put this book data into a local database, and modify your code so that you get the data from the db, instead of a hard-coded json.
 
    Let's modify the database  
-      8. Write code that allows a user to add a new book to the database.
+      ✅8. Write code that allows a user to add a new book to the database.
 
 
