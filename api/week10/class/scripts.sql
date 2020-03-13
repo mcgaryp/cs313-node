@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS book;
+DROP TABLE IF EXISTS class_10_book;
 
 CREATE TABLE class_10_book (
    id SERIAL PRIMARY KEY,
