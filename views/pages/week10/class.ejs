@@ -15,50 +15,60 @@
 
       <h1>Book List Class Activity</h1>
 
-      <!-- Choose a specific book by id -->
       <div class="row">
-         <h3>Search for one book by id</h3>
-      </div>
-      <div class="row">
-         <form action="/week10/class/oneBook">
-            <div class="form-group">
-               <label for="bookId">Choose a Book ID</label>
-               <input name="id" class="form-control" id="bookId">
-            </div>
-            <button class="btn btn-primary" type="submit">Search</button>
-         </form>
-      </div>
+         <!-- Choose a specific book by id -->
 
-      <!-- Search specific book by title -->
-      <div class="row">
-         <h3>Search for one book by id</h3>
-      </div>
-      <div class="row">
-         <form action="/week10/class/oneBook">
-            <div class="form-group">
-               <label for="titleSearch">Choose a Book ID</label>
-               <input name="title" class="form-control" id="titleSearch">
+         <div class="col">
+            <div class="row pt-3">
+               <h3>Search by ID</h3>
             </div>
-            <button class="btn btn-primary" type="submit">Search</button>
-         </form>
-      </div>
+            <div class="row">
+               <form action="/week10/class/oneBook">
+                  <div class="form-group">
+                     <label for="bookId">Choose a Book ID</label>
+                     <input name="id" class="form-control" id="bookId">
+                  </div>
+                  <button class="btn btn-primary" type="submit">Search</button>
+               </form>
+            </div>
+         </div>
 
-      <!-- add a new book -->
-      <div class="row pt-3">
-         <h3>Add a New Book</h3>
-      </div>
-      <div class="row">
-         <form action="/week10/class/createBook">
-            <div class="form-group">
-               <label for="title">Add a New Book Title</label>
-               <input name="title" class="form-control" id="title">
+         <!-- Search specific book by title -->
+         <div class="col">
+            <div class="row pt-3">
+               <h3>Search by Title</h3>
             </div>
-            <button class="btn btn-primary" type="submit">Add</button>
-         </form>
+            <div class="row">
+               <form action="/week10/class/oneBook">
+                  <div class="form-group">
+                     <label for="titleSearch">Choose a Book ID</label>
+                     <input name="title" class="form-control" id="titleSearch">
+                  </div>
+                  <button class="btn btn-primary" type="submit">Search</button>
+               </form>
+            </div>
+         </div>
+
+         <!-- add a new book -->
+         <div class="col">
+            <div class="row pt-3">
+               <h3>Add a New Book</h3>
+            </div>
+            <div class="row">
+               <form action="/week10/class/createBook">
+                  <div class="form-group">
+                     <label for="title">Add a New Book Title</label>
+                     <input name="title" class="form-control" id="title">
+                  </div>
+                  <button class="btn btn-primary" type="submit">Add</button>
+               </form>
+            </div>
+         </div>
+
       </div>
 
       <!-- see the whole list -->
-      <div class="row pt-3 pb-3">
+      <div class="row pt-3 pb-3 pr-3">
          <h3>Check out Your Book list</h3>
          <a class="btn btn-primary" href="/week10/class/bookList">Book List</a>
       </div>
