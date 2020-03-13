@@ -54,7 +54,7 @@ function createBook(req, res) {
 		}
 
 		console.log("Failed to add to the database")
-		response.render('./pages/week10/class', { books: null })
+		res.render('./pages/week10/class', { books: null })
 	})
 }
 
