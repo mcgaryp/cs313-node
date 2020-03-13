@@ -15,9 +15,24 @@ function handleBookList(request, response) {
 function handleSingleBook(request, response) {
 	var id = request.query.id
 
-	console.log("Returning details for book: " + id)
+	if (id) {
+		console.log("Returning details for book: " + id)
 
-	bookModel.getBook(id, (error, data) => {
+		bookModel.getBook(id, null, (error, data) => {
+			if (error || result == null || result.length <= 0) {
+				response.status(500).json({ success: false, data: error })
+				return
+			}
+
+			response.render('./pages/week10/class', { books: result })
+		})
+		return
+	}
+
+	var title = request.query.title
+	console.log("Returning details for book: " + title)
+
+	bookModel.getBook(null, title, (error, data) => {
 		if (error || result == null || result.length <= 0) {
 			response.status(500).json({ success: false, data: error })
 			return

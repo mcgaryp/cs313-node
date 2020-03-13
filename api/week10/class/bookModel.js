@@ -25,7 +25,7 @@ function getAllBooks(callback) {
 	})
 }
 
-function getBook(id, callback) {
+function getBook(id, title, callback) {
 	// var result = null
 
 	// getAllBooks((error, data) => {
@@ -40,9 +40,25 @@ function getBook(id, callback) {
 
 	// 	callback("There was an error", null)
 	// })
+	if (id) {
+		const query = "SELECT * FROM class_10_book WHERE id = $1::int;"
+		const param = [id]
 
-	const query = "SELECT * FROM class_10_book WHERE id = $1::int;"
-	const param = [id]
+		pool.query(query, param, (error, result) => {
+			if (result) {
+				console.log(result.rows)
+				callback(null, result.rows)
+				return
+			}
+			console.log(error)
+			callback(error, null)
+		})
+		
+		return
+	}
+
+	const query = "SELECT * FROM class_10_book WHERE title = $1;"
+	const param = [title]
 
 	pool.query(query, param, (error, result) => {
 		if (result) {
