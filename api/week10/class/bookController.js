@@ -9,7 +9,7 @@ function handleBookList(request, response) {
 			return
 		}
 		const books = JSON.tojson(result)
-		response.status(200).render('./pages/week10/class', books)
+		response.render('./pages/week10/class', books)
 	});
 }
 
