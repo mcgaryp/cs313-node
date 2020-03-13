@@ -4,12 +4,12 @@ function handleBookList(request, response) {
 	console.log("Returning the book list");
 
 	bookModel.getAllBooks(function (error, result) {
-		if (error || result == null) {
+		if (error || result == null || result.length <= 0) {
 			response.status(500).json({ success: false, data: error })
 			return
 		}
-		const books = result
-		response.status(200).json(books)
+		const books = JSON.tojson(result)
+		response.status(200).render('./pages/week10/class', books)
 	});
 }
 
