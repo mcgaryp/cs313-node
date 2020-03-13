@@ -16,7 +16,7 @@ function getAllBooks(callback) {
 	const query = "SELECT * FROM class_10_book;"
 	pool.query(query, (error, result) => {
 		if (result) {
-			console.log(result)
+			console.log(result.rows)
 			callback(null, result)
 			return
 		}
