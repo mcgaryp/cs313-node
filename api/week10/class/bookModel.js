@@ -17,7 +17,7 @@ function getAllBooks(callback) {
 	pool.query(query, (error, result) => {
 		if (result) {
 			console.log(result.rows)
-			callback(null, result)
+			callback(null, result.rows)
 			return
 		}
 		console.log(error)

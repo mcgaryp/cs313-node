@@ -4,7 +4,12 @@ function handleBookList(request, response) {
 	console.log("Returning the book list");
 
 	bookModel.getAllBooks(function (error, result) {
-		response.json(result);
+		if (error || result == null) {
+			response.status(500).json({ success: false, data: error })
+			return
+		}
+		const books = result
+		response.status(200).json(books)
 	});
 }
 
