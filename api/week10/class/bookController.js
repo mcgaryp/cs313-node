@@ -13,23 +13,39 @@ function handleBookList(request, response) {
 }
 
 function handleSingleBook(request, response) {
-	var id = request.query.id;
+	var id = request.query.id
 
-	console.log("Returning details for book: " + id);
+	console.log("Returning details for book: " + id)
 
 	bookModel.getBook(id, (error, data) => {
-		if (error == null) {
-			console.log(data)
-			response.json(data)
+		if (error || result == null || result.length <= 0) {
+			response.status(500).json({ success: false, data: error })
 			return
 		}
 
-		console.log(error)
+		response.render('./pages/week10/class', { books: result })
+	})
+}
+
+function createBook(req, res) {
+	var title = request.query.title
+
+	console.log("Adding new book with the title: " + title)
+
+	bookModel.createBook(title, (error, result) => {
+		if (result) {
+			console.log("We added to the database!")
+			return
+		}
+
+		console.log("Failed to add to the database")
+		response.render('./pages/week10/class', { books: null })
 	})
 }
 
 
 module.exports = {
 	handleBookList: handleBookList,
-	handleSingleBook: handleSingleBook
+	handleSingleBook: handleSingleBook,
+	createBook: createBook
 };

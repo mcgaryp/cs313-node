@@ -26,25 +26,47 @@ function getAllBooks(callback) {
 }
 
 function getBook(id, callback) {
+	// var result = null
 
-	var result = null
-	
-	getAllBooks((error, data) => {
-		if (error == null) {
-			books = data.books
-			result = books.find((value) => {
-				return value.id == id
-			})
+	// getAllBooks((error, data) => {
+	// 	if (error == null) {
+	// 		books = data.books
+	// 		result = books.find((value) => {
+	// 			return value.id == id
+	// 		})
 
-			callback(null, result)
+	// 		callback(null, result)
+	// 	}
+
+	// 	callback("There was an error", null)
+	// })
+
+	const query = "SELECT * FROM class_10_book WHERE id = $1::int;"
+	const param = [id]
+
+	pool.query(query, param, (error, result) => {
+		if (result) {
+			console.log(result.rows)
+			callback(null, result.rows)
+			return
 		}
-
-		callback("There was an error", null)
+		console.log(error)
+		callback(error, null)
 	})
 }
 
-function createBook(title) {
-
+function createBook(title, callback) {
+	const query = "INSERT INTO class_10_book (title) values ($1);"
+	const param = [title]
+	pool.query(query, param, (error, result) => {
+		if (result) {
+			console.log(result.rows)
+			callback(null, result.rows)
+			return
+		}
+		console.log(error)
+		callback(error, null)
+	})
 }
 
 module.exports = {
