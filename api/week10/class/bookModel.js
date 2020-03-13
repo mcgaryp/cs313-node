@@ -53,7 +53,7 @@ function getBook(id, title, callback) {
 			console.log(error)
 			callback(error, null)
 		})
-		
+
 		return
 	}
 
@@ -72,7 +72,7 @@ function getBook(id, title, callback) {
 }
 
 function createBook(title, callback) {
-	const query = "INSERT INTO class_10_book (title) values ($1);"
+	const query = "INSERT INTO class_10_book (title) VALUES ($1);"
 	const param = [title]
 	pool.query(query, param, (error, result) => {
 		if (result) {

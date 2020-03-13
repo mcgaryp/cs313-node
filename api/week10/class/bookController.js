@@ -43,7 +43,7 @@ function handleSingleBook(request, response) {
 }
 
 function createBook(req, res) {
-	var title = request.query.title
+	var title = req.query.title
 
 	console.log("Adding new book with the title: " + title)
 
