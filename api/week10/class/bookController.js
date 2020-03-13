@@ -8,8 +8,7 @@ function handleBookList(request, response) {
 			response.status(500).json({ success: false, data: error })
 			return
 		}
-		const books = JSON.tojson(result)
-		response.render('./pages/week10/class', books)
+		response.render('./pages/week10/class', { books: results })
 	});
 }
 
@@ -21,7 +20,7 @@ function handleSingleBook(request, response) {
 	bookModel.getBook(id, (error, data) => {
 		if (error == null) {
 			console.log(data)
-			response.json(data);
+			response.json(data)
 			return
 		}
 
