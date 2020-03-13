@@ -8,7 +8,7 @@ function handleBookList(request, response) {
 			response.status(500).json({ success: false, data: error })
 			return
 		}
-		response.render('./pages/week10/class', { books: results })
+		response.sendFile('./pages/week10/class', { books: results })
 	});
 }
 
