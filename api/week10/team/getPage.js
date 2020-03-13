@@ -1,3 +1,3 @@
 exports.getPage = (req, res) => {
-   res.render('./pages/week10/familyHistory', { books: null })
+   res.render('./pages/week10/familyHistory')
 }
