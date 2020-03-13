@@ -1,6 +1,10 @@
 var param = {
    weeks: [
       {
+         url: './zumBugz',
+         week: 'Zum Bugz Project'
+      },
+      {
          url: './week09/assign',
          week: 'Week09 Assign'
       },
