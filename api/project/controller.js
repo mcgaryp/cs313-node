@@ -23,6 +23,7 @@ function getDB(callback) {
       if (error) {
          console.log("Error with database: " + error)
          callback(error, null)
+         return
       }
 
       callback(null, data.rows)

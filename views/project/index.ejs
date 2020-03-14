@@ -4,29 +4,80 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Custom Zum Bug</title>
+   <title>Custom ZumBug</title>
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 
 <body>
+   <header class="row pl-3" style="height: 10; background-color: chocolate;">
+      <!-- back link to ZumBugz -->
+      <a class="btn btn-transparent" href="/">Back</a>
+   </header>
+
    <div class="container">
-      
+
       <!-- Title -->
       <div class="row">
-         <h1>Hello ZUM BUGz!</h1>
+         <h1>Customize your Zum Bug Ride</h1>
       </div>
 
-      <!-- Selectors -->
+      <!-- Download the template file -->
       <div class="row">
-         <a class="btn btn-primary" href="/zumBugz/add">Add</a>
-         <a class="btn btn-primary" href="/zumBugz/send">Send</a>
+         <h2>Download Blank Template</h2>
+      </div>
+      <div class="row">
+         <div class="col">
+            <a class="btn btn-primary" href="./images/bumblebeeBlank.pdf" download="template copy">Download PDF</a>
+         </div>
+         <div class="col">
+            <a class="btn btn-primary" href="./images/bumblebeeBlank.ai" download="template copy">Download AI</a>
+         </div>
+      </div>
+
+      <!-- Upload your own template file -->
+      <div class="row">
+         <h2>Upload Custom Template</h2>
+      </div>
+      <div class="row">
+         <form action="/upload">
+            <div class="col pb-2">
+               <input type="file" id="customTemplate" name="uploadCustom" accept="image/png, image/jpeg, .pdf, .jpg"
+                  required>
+            </div>
+            <div class="col">
+               <button type="submit" class="btn btn-primary">Upload Custom Template</button>
+            </div>
+         </form>
+      </div>
+
+      <!-- Draw on canvas to create your own Template -->
+      <div class="row">
+         <h2>Draw your own Creation Right HERE!</h2>
+      </div>
+
+      <div class="row">
+         <!-- form -->
+         <form action="/zumBugz/send">
+            <!-- canvas -->
+            <div class="col">
+               <canvas id="paper" width="1000" height="100" style="background-color: red;"></canvas>
+            </div>
+            <div class="col">
+               <!-- submit button -->
+               <button class="btn btn-primary">Save</button>
+            </div>
+         </form>
       </div>
 
       <!-- Select one Row -->
       <div class="row">
-         <div class="col">
-            <form action="zumbugz/send">
+         <h2>Choose one of our Fancy Templates</h2>
+      </div>
+      <div class="row">
+
+         <form action="zumbugz/send">
+            <div class="col">
                <label for="selectBug">Select your choice of Bugz</label>
                <select id="selectBug" name="bug" onchange="changed(value)" required>
                   <option value="">Select One</option>
@@ -34,20 +85,17 @@
                   <option value="<%= bugs[i].image %>"><%= bugs[i].bug_name %></option>
                   <% } %>
                </select>
-            </form>
-         </div>
+            </div>
+         </form>
+
          <div class="col" id="image">
-            <img src="images/IMG_7872.jpeg" alt="Something">
+            <img src="/images/IMG_7872.jpeg" alt="Something">
          </div>
       </div>
    </div>
 
    <!-- Scripts -->
-   <script>
-      function changed(value) {
-         document.getElementById('image').innerHTML = "<img src='" + value + "' alt='" + value + "'>"
-      } 
-   </script>
+   <script src="../../node_modules/socket.io/socket.io.js"></script>
    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
       crossorigin="anonymous"></script>
@@ -57,6 +105,7 @@
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"></script>
+   <script src="../../views/project/script.js"></script>
 </body>
 
 </html>
