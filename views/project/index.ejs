@@ -27,12 +27,17 @@
          <h2>Download Blank Template</h2>
       </div>
       <div class="row">
-         <div class="col">
-            <a class="btn btn-primary" href="./images/bumblebeeBlank.pdf" download="template copy">Download PDF</a>
-         </div>
-         <div class="col">
-            <a class="btn btn-primary" href="./images/bumblebeeBlank.ai" download="template copy">Download AI</a>
-         </div>
+         <form action="">
+            <div class="col pb-2">
+               <a class="btn btn-primary" href="./images/bumblebeeBlank.pdf" download="template copy">Download PDF File</a>
+            </div>
+            <div class="col pb-2">
+               <a class="btn btn-primary" href="./images/bumblebeeBlank.ai" download="template copy">Download Adobe Illustrator File</a>
+            </div>
+            <div class="col">
+               <a class="btn btn-primary" href="./images/bumblebeeBlank.jpeg" download="template copy">Download JPEG File</a>
+            </div>
+         </form>
       </div>
 
       <!-- Upload your own template file -->
@@ -42,8 +47,8 @@
       <div class="row">
          <form action="/upload">
             <div class="col pb-2">
-               <input type="file" id="customTemplate" name="uploadCustom" accept="image/png, image/jpeg, .pdf, .jpg"
-                  required>
+               <input class="btn btn-success" type="file" id="customTemplate" name="uploadCustom"
+                  accept="image/png, image/jpeg, .pdf, .jpg" required>
             </div>
             <div class="col">
                <button type="submit" class="btn btn-primary">Upload Custom Template</button>
@@ -75,7 +80,6 @@
          <h2>Choose one of our Fancy Templates</h2>
       </div>
       <div class="row">
-
          <form action="zumbugz/send">
             <div class="col">
                <label for="selectBug">Select your choice of Bugz</label>
@@ -86,8 +90,10 @@
                   <% } %>
                </select>
             </div>
+            <div class="col">
+               <button class="btn btn-primary" type="submit">Submit</button>
+            </div>
          </form>
-
          <div class="col" id="image">
             <img src="/images/IMG_7872.jpeg" alt="Something">
          </div>

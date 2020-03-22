@@ -89,7 +89,7 @@ module.exports = {
 	getAllBooks: getAllBooks,
 	getBook: getBook,
 	createBook: createBook
-};
+}
 
 
 // class_10_book

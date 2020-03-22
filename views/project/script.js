@@ -122,3 +122,33 @@ $(function(){
 function changed(value) {
    document.getElementById('image').innerHTML = "<img src='" + value + "' alt='" + value + "'>"
 } 
+
+
+// use to make a shadow style change
+// https://developer.mozilla.org/en-US/docs/Web/API/Element/shadowRoot
+connectedCallback() {
+   console.log('Custom square element added to page.');
+   updateStyle(this);
+ }
+ 
+ attributeChangedCallback(name, oldValue, newValue) {
+   console.log('Custom square element attributes changed.');
+   updateStyle(this);
+ }
+
+function updateStyle(elem) {
+   const shadow = elem.shadowRoot;
+   const childNodes = Array.from(shadow.childNodes);
+ 
+   childNodes.forEach(childNode => {
+     if (childNode.nodeName === 'STYLE') {
+       childNode.textContent = `
+         div {
+           width: ${elem.getAttribute('l')}px;
+           height: ${elem.getAttribute('l')}px;
+           background-color: ${elem.getAttribute('c')};
+         }
+       `;
+     }
+   });
+ }
