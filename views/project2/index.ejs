@@ -8,13 +8,39 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
    <script src="https://kit.fontawesome.com/79ad9f74b9.js" crossorigin="anonymous"></script>
+
+   <!-- TODO: On the first time the website is rendered the information is displayed. 
+        TODO: One the first que enterence the queue is completely erased and needs to be updates. 
+        TODO: Make the website ready to listen for updates on the server. RealTime updates.
+        TODO: Make the DOM dynamic table editable by DOM manipulation again.
+      -->
+
 </head>
 
 <body>
 
    <div class="container">
-      <h1 class="pt-2">Lab Help!</h1>
-      <div class="row p-1">
+
+      <!-- Title -->
+      <div class='row p-1'>
+         <div class="col">
+            <h1 class="pt-2 text-center">Need Lab Help?</h1>
+         </div>
+      </div>
+
+      <!-- Instructions -->
+      <div class='row p-1'>
+         <div class="col">
+            <p class="pt-2 text-center">First time? Life just got a lot simpler. Enter your <i>name, course #, & the assignment</i> you need help with in the form below. A TA will then submit a link to their prefered way of communicating with you. This could be Zoom.us, Google Duo, Facebook, or some other method of communication. The Ta's Information will show up in the TA column of your row once they are ready to help you. Click the link or follow their instructions given. No need to refresh the page we will make sure to notify you when you are next!</p>
+            <hr>
+            <p class="pt-2 text-center">Waiting in line and you solved your problem? Perfect! Go ahead and click the <div class="btn-danger"><i class='fas fa-trash'></i></div> in the last column. This will remove you from the line and allow the next student to be helped.</p>
+            <hr>
+            <p class="pt-2 text-center">Finished? Awesome! We hope that we were able to answer all your questions and you had a great experience. Either you or the TA will now remove you from the line. If you need help again later just fill out he form below.</p>
+         </div>
+      </div>
+      
+      <!-- Form to enter the queue -->
+      <div class="row p-1 justify-content-center">
          <form action="/lab-queue/addPerson" id="add">
             <div class="form-row">
 
