@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+<body>
+   <form action='/test' class='addTa' method="GET">
+      <div class='form-row'>
+         <div class='col'>
+            <input class='form-control' value='" + ta + "' id='" + i + "'>
+         </div>
+         <div class='col-2'>
+            <button class='btn btn-primary form-control'>Add TA</button>
+         </div>
+      </div>
+   </form>
+
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+   <script>
+      $(function () {
+         $('.addTa').submit((event) => {
+            event.preventDefault()
+
+            var id = event.delegateTarget[0].id
+            var ta = event.delegateTarget[0].value
+
+            console.log("ID: " + id)
+            console.log("link: " + ta)
+
+            var target = '/addTa?ta=' + ta + '&id=' + id
+         
+            console.log(event)
+
+            $.get(target, function (res) {
+               var data = null
+               data = JSON.parse(res)
+               renderQueue(data)
+            })
+         })
+      });
+   </script>
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Lab Queue</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <script src="https://kit.fontawesome.com/79ad9f74b9.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+   <div class="container">
+      <h1 class="pt-2">Lab Help!</h1>
+      <div class="row p-1">
+         <form action="/lab-queue/addPerson" id="add">
+            <div class="form-row">
+
+               <div class="col">
+                  <input type="text" class="form-control" id="name" value="" placeholder="Your Name">
+               </div>
+
+               <div class="col">
+                  <input type="text" class="form-control" id="class" value="" placeholder="Class">
+               </div>
+
+               <div class="col">
+                  <input type="text" class="form-control" id="details" value="" placeholder="What assignment?">
+               </div>
+
+               <button class="btn btn-success" type="submit">Get in Line!</button>
+
+            </div>
+         </form>
+         
+      </div>
+
+      <!-- queue -->
+      <div class="row p-1">
+         <table class="table">
+            <thead>
+               <tr>
+                  <th scope="col"></th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Class</th>
+                  <th scope="col">Need help with...</th>
+                  <th scope="col">TA Zoom Link</th>
+                  <th scope="col"></th>
+               </tr>
+            </thead>
+            <tbody id="queue"></tbody>
+         </table>
+      </div>
+
+   </div>
+
+   <!-- scripts -->
+   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"></script>
+
+   <script>
+      var ERROR = "There was an error.";
+
+      $(function() {
+         $(document).ready(function () {
+            var target = '/lab-queue/start'
+            
+            $.get(target, res => {
+               var data = null
+               data = JSON.parse(res)
+               renderQueue(data)
+            })
+         });
+      });
+
+      $(function () {
+         var form = $('#add')
+         var name = $('#name')
+         var theClass = $('#class')
+         var details = $('#details')
+
+         form.on('submit', function (e) {
+            e.preventDefault()
+
+            var target = '/lab-queue/addPerson?name=' + name.val() + '&class=' + theClass.val() + '&details=' + details.val()
+
+            $.get(target, function (res) {
+               var data = null
+               data = JSON.parse(res)
+               renderQueue(data)
+               form.trigger("reset")
+            })
+         })
+
+      });
+
+      $(function () {
+         $('form.addTa').submit(event => {
+            console.log("button clicked")
+            event.preventDefault()
+
+            var id = event.delegateTarget[0].id
+            var ta = event.delegateTarget[0].value
+
+            var target = '/lab-queue/addTa?ta=' + ta + '&id=' + id
+
+            $.get(target, function (res) {
+               var data = null
+               data = JSON.parse(res)
+               renderQueue(data)
+            })
+         })
+      });
+
+      $(function () {
+         $('form.delete').submit(event => {
+            event.preventDefault()
+
+            var id = event.delegateTarget[0].id
+
+            var target = '/lab-queue/removePerson?id=' + id
+            $.get(target, function (res) {
+               var data = null
+               data = JSON.parse(res)
+               renderQueue(data)
+            })
+         })
+      });
+
+
+      function renderQueue(queue) {
+         console.log(queue)
+         var text = ""
+         if (queue != null) {
+            for (var i = 0; i < queue.length; i++) {
+               text += makeText(queue[i].class, queue[i].details, queue[i].name, queue[i].ta, i)
+            }
+            document.getElementById('queue').innerHTML = text
+         }
+         // $(document).replaceWith(divClone.clone(true))
+      }
+
+      function makeText(c, details, name, ta, i) {
+         var text = "<tr class='rowData'><th scope='row'>" + (i + 1) + "</th><td>" + name + "</td><td>" + c + "</td><td>" + details + "</td><td>"
+         if (ta) {
+            console.log(ta)
+            text += "<a href='" + ta + "'>" + ta + "</a>"
+         } else {
+            text += "<form action='/lab-queue/addTa' class='addTa'><div class='form-row'><div class='col'><input type='text' class='form-control' value='" + ta + "' id='" + i + "'></div><div class='col-2'><button class='btn btn-primary form-control' type='button'>Add TA</button></div></div></form>"
+         }
+         text += "</td><td><form class='delete' action='/lab-queue/removePerson'><div class='form-row'><input id='" + i + "' hidden><button class='btn btn-danger' type='button' name='delete'><i class='fas fa-trash'></i></div></form></td></tr>"
+         return text
+      }
+
+      // var divClone = $(document).clone(true);
+
+   </script>
+
+</body>
+
+</html>

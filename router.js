@@ -7,11 +7,12 @@ const week10TeamRouter = require('./api/week10/team/familyHistoryRouter')
 const week10ClassRouter = require('./api/week10/class/bookRouter')
 const projectRouter = require('./api/project/router')
 const week11TeamRouter = require('./api/week11/team/router')
+const week12TeamRouter = require('./api/week12/team/router')
+const project2Router = require('./api/project2/router')
 
 // Page Consts
 const postalPage = require('./api/week09/assign/pageController')
 const class10Page = require('./api/week10/class/getPage')
-
 
 // Route to APIs
 router.get('/mail', postalCalculatorController)
@@ -19,6 +20,8 @@ router.use('/week10/team', week10TeamRouter)
 router.use('/week10/class', week10ClassRouter)
 router.use('/zumBugz', projectRouter)
 router.use('/week11/team', week11TeamRouter)
+router.use('/week12/team', week12TeamRouter)
+router.use('/lab-queue', project2Router)
 
 // Route to Pages
 router.get('/week09/assign', postalPage.getForm)

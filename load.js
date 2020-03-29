@@ -5,6 +5,10 @@ var param = {
          week: 'Zum Bugz Project'
       },
       {
+         url: './lab-queue',
+         week: 'Lab Help'
+      },
+      {
          url: './week09/assign',
          week: 'Week09 Assign'
       },
@@ -23,7 +27,11 @@ var param = {
       {
          url: './week11/team',
          week: 'Week 11 Team'
-      }
+      },
+       {
+          url: './week12/team',
+          week: 'Week 12 Team'
+       }
    ]
 }
 
