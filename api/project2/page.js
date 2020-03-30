@@ -69,7 +69,7 @@ function makeText(c, details, name, ta, i) {
    if (ta) {
       text += "<a href='" + ta + "'>" + ta + "</a>"
    } else {
-      text += "<form action='/lab-queue/addTa' class='addTa'><div class='form-row'><div class='col'><input type='text' class='form-control' value='" + ta + "' id='" + i + "'><div class='pt-1'><button class='btn btn-primary btn-block' type='submit'>Add TA</button></div></div></div></form>"
+      text += "<form action='/lab-queue/addTa' class='addTa'><div class='form-row'><div class='col'><input type='text' class='form-control' value='" + ta + "' id='" + i + "' placeholder='TAs Zoom Link'><div class='pt-1'><button class='btn btn-primary btn-block' type='submit'>Add TA</button></div></div></div></form>"
    }
 
    text += "</td><td><form class='delete' action='/lab-queue/removePerson'><div class='form-row'><input id='" + i + "' hidden><button class='btn btn-danger' type='submit' name='delete'><i class='fas fa-trash'></i></button></div></form></td></tr>"
