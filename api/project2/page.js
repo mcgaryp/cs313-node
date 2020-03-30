@@ -59,13 +59,21 @@ function renderQueue(queue) {
 }
 
 function makeText(c, details, name, ta, i) {
-   var text = "<tr class='rowData'><th scope='row'>" + (i + 1) + "</th><td>" + name + "</td><td>" + c + "</td><td>" + details + "</td><td>"
+   var text = "<tr class='rowData'"
+   if (ta) {
+      text += " style='background-color: #ffc107; border-color: #ffc107'"
+   }
+
+   text += "><th scope='row'>" + (i + 1) + "</th><td>" + name + "</td><td>" + c + "</td><td>" + details + "</td><td>"
+
    if (ta) {
       text += "<a href='" + ta + "'>" + ta + "</a>"
    } else {
-      text += "<form action='/lab-queue/addTa' class='addTa'><div class='form-row'><div class='col'><input type='text' class='form-control' value='" + ta + "' id='" + i + "'><div class='pt-1'><button class='btn btn-primary form-control' type='submit'>Add TA</button></div></div></div></form>"
+      text += "<form action='/lab-queue/addTa' class='addTa'><div class='form-row'><div class='col'><input type='text' class='form-control' value='" + ta + "' id='" + i + "'><div class='pt-1'><button class='btn btn-primary btn-block' type='submit'>Add TA</button></div></div></div></form>"
    }
-   text += "</td><td><form class='delete' action='/lab-queue/removePerson'><div class='form-row'><input id='" + i + "' hidden><button class='btn btn-danger form-control' type='submit' name='delete'><i class='fas fa-trash'></i></button></div></form></td></tr>"
+
+   text += "</td><td><form class='delete' action='/lab-queue/removePerson'><div class='form-row'><input id='" + i + "' hidden><button class='btn btn-danger' type='submit' name='delete'><i class='fas fa-trash'></i></button></div></form></td></tr>"
+   
    return text
 }
 
