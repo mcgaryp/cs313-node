@@ -142,34 +142,7 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"></script>
    <script id="replace" type="text/javascript" , src="./project2/page.js"></script>
-   <script>
-      resizeWindow()
 
-      $(window).resize(() => {
-         resizeWindow()
-      });
-
-      function resizeWindow() {
-         if ($(window).width() <= 700) {
-            $('.enterCol').removeClass('col')
-            $('.enterCol').addClass('col-12')
-            $('.enterButton').removeClass('col-auto')
-            $('.enterButton').addClass('col-12')
-         }
-
-         if ($(window).width() > 700) {
-            $('.enterCol').removeClass('col-12')
-            $('.enterCol').addClass('col')
-            $('.enterButton').removeClass('col-12')
-            $('.enterButton').addClass('col-auto')
-         }
-      }
-   </script>
 </body>
-
-
-<div class="col-12">
-
-</div>
 
 </html>

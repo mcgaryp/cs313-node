@@ -101,3 +101,25 @@ function load() {
    })
 
 }
+
+resizeWindow()
+
+      $(window).resize(() => {
+         resizeWindow()
+      });
+
+      function resizeWindow() {
+         if ($(window).width() <= 700) {
+            $('.enterCol').removeClass('col')
+            $('.enterCol').addClass('col-12')
+            $('.enterButton').removeClass('col-auto')
+            $('.enterButton').addClass('col-12')
+         }
+
+         if ($(window).width() > 700) {
+            $('.enterCol').removeClass('col-12')
+            $('.enterCol').addClass('col')
+            $('.enterButton').removeClass('col-12')
+            $('.enterButton').addClass('col-auto')
+         }
+      }
