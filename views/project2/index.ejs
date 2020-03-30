@@ -36,23 +36,23 @@
          <form action="/lab-queue/addPerson" id="add">
             <div class="form-row enterRow">
 
-               <div class="col enterCol">
+               <div class="col p-1 enterCol">
                   <input type="text" class="form-control" id="name" value="" placeholder="Your Name">
                </div>
 
-               <div class="col enterCol">
+               <div class="col p-1 enterCol">
                   <input type="text" class="form-control" id="class" value="" placeholder="Class">
                </div>
 
-               <div class="col enterCol">
+               <div class="col p-1 enterCol">
                   <input type="text" class="form-control" id="details" value="" placeholder="What assignment?">
                </div>
 
-               <div class="col enterCol">
+               <div class="col p-1 enterCol">
                   <button class="btn btn-success" type="submit">Get in Line!</button>
                </div>
 
-               <div class="col">
+               <div class="col p-1 enterCol">
                   <a href="#first" class="btn btn-warning">First-time user?</a>
                </div>
 
@@ -141,14 +141,21 @@
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"></script>
-   <script id="replace" type="text/javascript" , src="./project2/page.js">
+   <script id="replace" type="text/javascript" , src="./project2/page.js"></script>
+   <script>
       $(window).resize(() => {
          if ($(window).width() <= 900) {
-            // $('body').css('max-width: ') /
-            $('#queueRow').contents().unwrap()
+            $('.enterRow').removeClass('form-row')
+            $('.enterCol').removeClass('col')
+            $('.enterCol').addClass('form-row')
+         }
+
+         if ($(window).width() > 900) {
+            $('.enterRow').addClass('form-row')
+            $$('.enterCol').removeClass('form-row')
+            $('.enterCol').addClass('col')
          }
       });
-
    </script>
 </body>
 
