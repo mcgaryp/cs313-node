@@ -32,7 +32,7 @@
       </div>
 
       <!-- Form to enter the queue -->
-      <div class="row p-1 justify-content-center" media>
+      <div class="row p-3 justify-content-center" media>
          <form action="/lab-queue/addPerson" id="add">
             <div class="form-row enterRow">
 
@@ -48,11 +48,11 @@
                   <input type="text" class="form-control" id="details" value="" placeholder="What assignment?">
                </div>
 
-               <div class="col p-1 enterCol">
+               <div class="col p-1 enterCol align-self-center">
                   <button class="btn btn-success" type="submit">Get in Line!</button>
                </div>
 
-               <div class="col p-1 enterCol">
+               <div class="col p-1 enterCol align-self-center">
                   <a href="#first" class="btn btn-warning">First-time user?</a>
                </div>
 
@@ -144,13 +144,14 @@
    <script id="replace" type="text/javascript" , src="./project2/page.js"></script>
    <script>
       $(function () {
-         if ($(window).width() <= 900) {
+         if ($(window).width() <= 750) {
             $('.enterRow').removeClass('form-row')
+            $('.enterRow').addClass('row')
             $('.enterCol').removeClass('col')
-            $('.enterCol').addClass('form-row')
+            $('.enterCol').addClass('col-12')
          }
 
-         if ($(window).width() > 900) {
+         if ($(window).width() > 750) {
             $('.enterRow').addClass('form-row')
             $$('.enterCol').removeClass('form-row')
             $('.enterCol').addClass('col')
