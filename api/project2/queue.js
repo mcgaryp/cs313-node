@@ -8,6 +8,26 @@ const firebaseApp = firebase.initializeApp({
 const db = firebase.database()
 const ref = db.ref('/queue')
 
+// TODO: Make function that sends updated list when student is added or removed
+// TODO: Make function that sends updated list when ta is updated
+
+/*****************************************************
+ * UPDATE VIA SOCKET
+ ****************************************************/
+function update(req, res, next) {
+
+   // added student
+   var list = new Array()
+   ref.on('child_added', (snapshot) => {
+      list.push(snapshot.val())
+   })
+   // added TA
+
+   // removed student
+
+   io.emit('list', list)
+}
+
 /*****************************************************
  * ADD to FireBase
  ****************************************************/
@@ -33,7 +53,6 @@ function handleAdd(req, res) {
 
 // Add a student to the queue
 function addStudent(name, theClass, details) {
-
    ref.push({
       name: name,
       class: theClass,
@@ -70,11 +89,9 @@ function removeStudent(id, callback) {
       sref.remove().then(() => {
          var list = []
          ref.once('value', snap => {
-            console.log("Updating list")
             snap.forEach(data => {
                list.push(data.val())
             })
-            console.log("New List")
             console.log(list)
             callback(null, list)
          })
@@ -84,6 +101,9 @@ function removeStudent(id, callback) {
    })
 }
 
+/*******************************************************
+ * RETRIEVE KEY FROM FIREBASE
+ ******************************************************/
 // Get the right key
 function getKey(id, callback) {
    /* TODO: ID IS NOT SET */
@@ -93,7 +113,6 @@ function getKey(id, callback) {
          console.log(data.key)
          keys.push(data.key)
       })
-      console.log("96 key: " + keys[id])
       callback(keys[id])
    })
 }
@@ -115,12 +134,10 @@ function startUp(callback) {
 /*****************************************************
  * ADDING TA to Firebase and UPDATING
  ****************************************************/
+// handle how to add ta
 function handleAddTa(req, res) {
    var link = req.query.ta
    var id = req.query.id
-
-   console.log(link)
-   console.log(req.query.id)
 
    updateTa(id, link, (err) => {
       if (!err) {
@@ -138,6 +155,7 @@ function handleAddTa(req, res) {
    })
 }
 
+// add a ta
 function updateTa(id, link, callback) {
    getKey(id, key => {
       const sref = db.ref('/queue/' + key)

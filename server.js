@@ -8,6 +8,7 @@ const io = require('socket.io').listen(server)
 
 const bodyParser = require('body-parser')
 
+app.set('io', io)
 app.set('port', port)
 
 app.use(express.static(__dirname + '/api'))

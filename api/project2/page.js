@@ -11,7 +11,6 @@ $(document).ready(function () {
 
 $(document).ready(function () {
    var form = $('form.addTa').submit(event => {
-      console.log("button clicked")
       event.preventDefault()
 
       var id = event.delegateTarget[0].id
@@ -25,7 +24,6 @@ $(document).ready(function () {
          renderQueue(data)
       })
    })
-   console.log(form)
 });
 
 $(function () {
@@ -50,7 +48,6 @@ $(function () {
 
 
 function renderQueue(queue) {
-   console.log(queue)
    var text = ""
    if (queue != null) {
       for (var i = 0; i < queue.length; i++) {
@@ -64,12 +61,11 @@ function renderQueue(queue) {
 function makeText(c, details, name, ta, i) {
    var text = "<tr class='rowData'><th scope='row'>" + (i + 1) + "</th><td>" + name + "</td><td>" + c + "</td><td>" + details + "</td><td>"
    if (ta) {
-      console.log(ta)
       text += "<a href='" + ta + "'>" + ta + "</a>"
    } else {
-      text += "<form action='/lab-queue/addTa' class='addTa'><div class='form-row'><div class='col'><input type='text' class='form-control' value='" + ta + "' id='" + i + "'></div><div class='col-2'><button class='btn btn-primary form-control' type='submit'>Add TA</button></div></div></form>"
+      text += "<form action='/lab-queue/addTa' class='addTa'><div class='form-row'><div class='col'><input type='text' class='form-control' value='" + ta + "' id='" + i + "'><div class='pt-1'><button class='btn btn-primary form-control' type='submit'>Add TA</button></div></div></div></form>"
    }
-   text += "</td><td><form class='delete' action='/lab-queue/removePerson'><div class='form-row'><input id='" + i + "' hidden><button class='btn btn-danger' type='submit' name='delete'><i class='fas fa-trash'></i></div></form></td></tr>"
+   text += "</td><td><form class='delete' action='/lab-queue/removePerson'><div class='form-row'><input id='" + i + "' hidden><button class='btn btn-danger form-control' type='submit' name='delete'><i class='fas fa-trash'></i></button></div></form></td></tr>"
    return text
 }
 

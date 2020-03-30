@@ -8,6 +8,13 @@ router.use(bodyParser.urlencoded({ extended: true }))
 
 router.get('/', (req, res) => {
    res.render('./project2/index')
+   var io = req.app.io
+   io.socket.on('connection', socket => {
+      console.log('user is connected')
+      socket.on('disconnect', () => {
+         console.log('user disconnected')
+      })
+   })
 })
 
 router.get('/start', (req, res) => {
