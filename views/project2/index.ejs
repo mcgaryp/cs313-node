@@ -18,11 +18,11 @@
         TODO: Make the website ready to listen for updates on the server. RealTime updates.
         TODO: Make this mobile friendly anything below 1000px needs to look different bc the table doesn't fit right
       -->
-      <style>
-         body {
+   <style>
+      /* body {
             min-width: 400px;
-         }
-      </style>
+         } */
+   </style>
 </head>
 
 <body>
@@ -39,21 +39,23 @@
       <!-- Form to enter the queue -->
       <div class="row p-1 justify-content-center" media>
          <form action="/lab-queue/addPerson" id="add">
-            <div class="form-row" id="queueRow">
+            <div class="form-row enterRow">
 
-               <div class="col">
+               <div class="col enterCol">
                   <input type="text" class="form-control" id="name" value="" placeholder="Your Name">
                </div>
 
-               <div class="col">
+               <div class="col enterCol">
                   <input type="text" class="form-control" id="class" value="" placeholder="Class">
                </div>
 
-               <div class="col">
+               <div class="col enterCol">
                   <input type="text" class="form-control" id="details" value="" placeholder="What assignment?">
                </div>
 
-               <button class="btn btn-success" type="submit">Get in Line!</button>
+               <div class="col enterCol">
+                  <button class="btn btn-success" type="submit">Get in Line!</button>
+               </div>
 
                <div class="col">
                   <a href="#first" class="btn btn-warning">First-time user?</a>
@@ -145,11 +147,12 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"></script>
    <script id="replace" type="text/javascript" , src="./project2/page.js">
-   $(window).resize(() => {
-      if ($(window).width() <= 900) {
-         $('body').css('max-width: ')
-      }
-   });
+      $(window).resize(() => {
+         if ($(window).width() <= 900) {
+            // $('body').css('max-width: ') /
+            $('#queueRow').contents().unwrap()
+         }
+      });
 
    </script>
 </body>
