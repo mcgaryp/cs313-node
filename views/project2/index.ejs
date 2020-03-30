@@ -48,12 +48,12 @@
                   <input type="text" class="form-control" id="details" value="" placeholder="What assignment?">
                </div>
 
-               <div class="col p-1 enterCol align-self-center">
-                  <button class="btn btn-success" type="submit">Get in Line!</button>
+               <div class="col-auto p-1 enterButton">
+                  <button class="btn btn-success btn-block" type="submit">Get in Line!</button>
                </div>
 
-               <div class="col p-1 enterCol align-self-center">
-                  <a href="#first" class="btn btn-warning">First-time user?</a>
+               <div class="col-auto p-1 enterButton">
+                  <a href="#first" class="btn btn-warning btn-block">First-time user?</a>
                </div>
 
             </div>
@@ -84,11 +84,11 @@
       <div class='row p-1' id="first">
          <div class="col">
             <div class="row">
-               <div class="col-2 align-self-center">
+               <div class="col-auto align-self-center">
                   <h3>First-time?</h3>
                </div>
-               <div class="col">
-                  <p class="pt-2 text-justified">
+               <div class="col-auto">
+                  <p class="pt-2 text-center">
                      Life just got a lot simpler. Enter your <i>name, course #, & the assignment</i> you need help with
                      in the form above ☝🏻.<br>
                      A TA will then submit a link to their prefered way of communicating with you. This could be
@@ -102,10 +102,10 @@
 
             <hr>
             <div class="row">
-               <div class="col-2 align-self-center">
+               <div class="col-auto align-self-center">
                   <h3>Solved your problem?</h3>
                </div>
-               <div class="col">
+               <div class="col-auto">
                   <p class="pt-2 text-center">
                      Perfect! Go ahead and click the <button class="btn btn-danger"><i
                            class='btn-danger fas fa-trash'></i></button> in the last column. This will remove you from
@@ -116,10 +116,10 @@
 
             <hr>
             <div class="row">
-               <div class="col-2 align-self-center">
+               <div class="col-auto align-self-center">
                   <h3>Finished?</h3>
                </div>
-               <div class="col">
+               <div class="col-auto">
                   <p class="pt-2 text-center">
                      Awesome! We hope that we were able to answer all your questions and you had a great experience.
                      Either you or the TA will now remove you from the line.<br>
@@ -143,21 +143,27 @@
       crossorigin="anonymous"></script>
    <script id="replace" type="text/javascript" , src="./project2/page.js"></script>
    <script>
-      $(function () {
-         if ($(window).width() <= 750) {
-            $('.enterRow').removeClass('form-row')
-            $('.enterRow').addClass('row')
+      $(window).resize(() => {
+         if ($(window).width() <= 700) {
             $('.enterCol').removeClass('col')
             $('.enterCol').addClass('col-12')
+            $('.enterButton').removeClass('col-auto')
+            $('.enterButton').addClass('col-12')
          }
 
-         if ($(window).width() > 750) {
-            $('.enterRow').addClass('form-row')
-            $$('.enterCol').removeClass('form-row')
+         if ($(window).width() > 700) {
+            $('.enterCol').removeClass('col-12')
             $('.enterCol').addClass('col')
+            $('.enterButton').removeClass('col-12')
+            $('.enterButton').addClass('col-auto')
          }
       });
    </script>
 </body>
+
+
+<div class="col-12">
+
+</div>
 
 </html>
