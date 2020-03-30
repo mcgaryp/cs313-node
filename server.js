@@ -3,6 +3,9 @@ const router = require('./router')
 const load = require('./load')
 const app = express()
 const port = process.env.PORT || 8000
+const server = require('http').Server(app)
+const io = require('socket.io').listen(server)
+
 const bodyParser = require('body-parser')
 
 app.set('port', port)

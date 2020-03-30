@@ -8,11 +8,15 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
    <script src="https://kit.fontawesome.com/79ad9f74b9.js" crossorigin="anonymous"></script>
+   <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
+   <script>
+      var socket = io();
+   </script>
 
-   <!-- TODO: On the first time the website is rendered the information is displayed. 
+   <!-- DONE: On the first time the website is rendered the information is displayed.
         TODO: One the first que enterence the queue is completely erased and needs to be updates. 
         TODO: Make the website ready to listen for updates on the server. RealTime updates.
-        TODO: Make the DOM dynamic table editable by DOM manipulation again.
+        DONE: Make the DOM dynamic table editable by DOM manipulation again.
       -->
 
 </head>
@@ -29,9 +33,9 @@
       </div>
 
       <div class="row p-1">
-         
+
       </div>
-      
+
       <!-- Form to enter the queue -->
       <div class="row p-1 justify-content-center">
          <form action="/lab-queue/addPerson" id="add">
@@ -57,7 +61,7 @@
 
             </div>
          </form>
-         
+
       </div>
 
       <!-- queue -->
@@ -77,7 +81,7 @@
          </table>
       </div>
 
-      <hr> 
+      <hr>
 
       <!-- Instructions -->
       <div class='row p-1' id="first">
@@ -87,10 +91,13 @@
                   <h3>First-time?</h3>
                </div>
                <div class="col">
-                  <p class="pt-2 text-justified"> 
-                     Life just got a lot simpler. Enter your <i>name, course #, & the assignment</i> you need help with in the form above ☝🏻.<br> 
-                     A TA will then submit a link to their prefered way of communicating with you. This could be Zoom.us, Google Duo, Facebook, or some other method of communication. The Ta's Information will show up in the TA column of your row once they are ready to help you.<br> 
-                     Click the link or follow their instructions given.<br> 
+                  <p class="pt-2 text-justified">
+                     Life just got a lot simpler. Enter your <i>name, course #, & the assignment</i> you need help with
+                     in the form above ☝🏻.<br>
+                     A TA will then submit a link to their prefered way of communicating with you. This could be
+                     Zoom.us, Google Duo, Facebook, or some other method of communication. The Ta's Information will
+                     show up in the TA column of your row once they are ready to help you.<br>
+                     Click the link or follow their instructions given.<br>
                      No need to refresh the page we will make sure to notify you when you are next!
                   </p>
                </div>
@@ -103,7 +110,9 @@
                </div>
                <div class="col">
                   <p class="pt-2 text-center">
-                     Perfect! Go ahead and click the <button class="btn btn-danger"><i class='btn-danger fas fa-trash'></i></button> in the last column. This will remove you from the line and allow the next student to be helped.
+                     Perfect! Go ahead and click the <button class="btn btn-danger"><i
+                           class='btn-danger fas fa-trash'></i></button> in the last column. This will remove you from
+                     the line and allow the next student to be helped.
                   </p>
                </div>
             </div>
@@ -115,7 +124,8 @@
                </div>
                <div class="col">
                   <p class="pt-2 text-center">
-                     Awesome! We hope that we were able to answer all your questions and you had a great experience. Either you or the TA will now remove you from the line.<br>
+                     Awesome! We hope that we were able to answer all your questions and you had a great experience.
+                     Either you or the TA will now remove you from the line.<br>
                      If you need help again later just fill out the form above ☝🏻.
                   </p>
                </div>
@@ -134,104 +144,7 @@
    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"></script>
-
-   <script>
-      var ERROR = "There was an error.";
-
-      $(function() {
-         $(document).ready(function () {
-            var target = '/lab-queue/start'
-            
-            $.get(target, res => {
-               var data = null
-               data = JSON.parse(res)
-               renderQueue(data)
-            })
-         });
-      });
-
-      $(function () {
-         var form = $('#add')
-         var name = $('#name')
-         var theClass = $('#class')
-         var details = $('#details')
-
-         form.on('submit', function (e) {
-            e.preventDefault()
-
-            var target = '/lab-queue/addPerson?name=' + name.val() + '&class=' + theClass.val() + '&details=' + details.val()
-
-            $.get(target, function (res) {
-               var data = null
-               data = JSON.parse(res)
-               renderQueue(data)
-               form.trigger("reset")
-            })
-         })
-
-      });
-
-      $(function () {
-         $('form.addTa').submit(event => {
-            console.log("button clicked")
-            event.preventDefault()
-
-            var id = event.delegateTarget[0].id
-            var ta = event.delegateTarget[0].value
-
-            var target = '/lab-queue/addTa?ta=' + ta + '&id=' + id
-
-            $.get(target, function (res) {
-               var data = null
-               data = JSON.parse(res)
-               renderQueue(data)
-            })
-         })
-      });
-
-      $(function () {
-         $('form.delete').submit(event => {
-            event.preventDefault()
-
-            var id = event.delegateTarget[0].id
-
-            var target = '/lab-queue/removePerson?id=' + id
-            $.get(target, function (res) {
-               var data = null
-               data = JSON.parse(res)
-               renderQueue(data)
-            })
-         })
-      });
-
-
-      function renderQueue(queue) {
-         console.log(queue)
-         var text = ""
-         if (queue != null) {
-            for (var i = 0; i < queue.length; i++) {
-               text += makeText(queue[i].class, queue[i].details, queue[i].name, queue[i].ta, i)
-            }
-            document.getElementById('queue').innerHTML = text
-         }
-         // $(document).replaceWith(divClone.clone(true))
-      }
-
-      function makeText(c, details, name, ta, i) {
-         var text = "<tr class='rowData'><th scope='row'>" + (i + 1) + "</th><td>" + name + "</td><td>" + c + "</td><td>" + details + "</td><td>"
-         if (ta) {
-            console.log(ta)
-            text += "<a href='" + ta + "'>" + ta + "</a>"
-         } else {
-            text += "<form action='/lab-queue/addTa' class='addTa'><div class='form-row'><div class='col'><input type='text' class='form-control' value='" + ta + "' id='" + i + "'></div><div class='col-2'><button class='btn btn-primary form-control' type='button'>Add TA</button></div></div></form>"
-         }
-         text += "</td><td><form class='delete' action='/lab-queue/removePerson'><div class='form-row'><input id='" + i + "' hidden><button class='btn btn-danger' type='button' name='delete'><i class='fas fa-trash'></i></div></form></td></tr>"
-         return text
-      }
-
-      // var divClone = $(document).clone(true);
-
-   </script>
+   <script id="replace" type="text/javascript" , src="./project2/page.js"></script>
 
 </body>
 

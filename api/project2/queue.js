@@ -1,6 +1,6 @@
 // Firebase stuff
 const firebase = require('firebase-admin');
-var serviceAccount = require('../../serviceAccountKey.json');
+const serviceAccount = require('../../serviceAccountKey.json');
 const firebaseApp = firebase.initializeApp({
    credential: firebase.credential.cert(serviceAccount),
    databaseURL: "https://lab-queue-8afd1.firebaseio.com"
@@ -139,18 +139,19 @@ function handleAddTa(req, res) {
 }
 
 function updateTa(id, link, callback) {
-   const path = getKey(id)
-   const sref = db.ref('/queue/' + path)
+   getKey(id, key => {
+      const sref = db.ref('/queue/' + key)
 
-   sref.update({
-      ta: link
-   }, (err) => {
-      if (!err) {
-         callback(null)
-      } else {
-         console.log(err)
-         callback("Failed to Update the TA")
-      }
+      sref.update({
+         ta: link
+      }, (err) => {
+         if (!err) {
+            callback(null)
+         } else {
+            console.log(err)
+            callback("Failed to Update the TA")
+         }
+      })
    })
 }
 
