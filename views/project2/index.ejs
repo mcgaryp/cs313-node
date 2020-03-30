@@ -143,7 +143,13 @@
       crossorigin="anonymous"></script>
    <script id="replace" type="text/javascript" , src="./project2/page.js"></script>
    <script>
+      resizeWindow()
+
       $(window).resize(() => {
+         resizeWindow()
+      });
+
+      function resizeWindow() {
          if ($(window).width() <= 700) {
             $('.enterCol').removeClass('col')
             $('.enterCol').addClass('col-12')
@@ -157,7 +163,7 @@
             $('.enterButton').removeClass('col-12')
             $('.enterButton').addClass('col-auto')
          }
-      });
+      }
    </script>
 </body>
 
