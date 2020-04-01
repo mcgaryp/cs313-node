@@ -8,9 +8,6 @@ const firebaseApp = firebase.initializeApp({
 const db = firebase.database()
 const ref = firebase.database().ref().child('/queue')
 
-// TODO: Make function that sends updated list when student is added or removed
-// TODO: Make function that sends updated list when ta is updated
-
 /*****************************************************
  * ADD to FireBase
  *****************************************************/
