@@ -6,31 +6,14 @@ const firebaseApp = firebase.initializeApp({
    databaseURL: "https://lab-queue-8afd1.firebaseio.com"
 })
 const db = firebase.database()
-const ref = db.ref('/queue')
+const ref = firebase.database().ref().child('/queue')
 
 // TODO: Make function that sends updated list when student is added or removed
 // TODO: Make function that sends updated list when ta is updated
 
 /*****************************************************
- * UPDATE VIA SOCKET
- ****************************************************/
-function update(req, res, next) {
-
-   // added student
-   var list = new Array()
-   ref.on('child_added', (snapshot) => {
-      list.push(snapshot.val())
-   })
-   // added TA
-
-   // removed student
-
-   io.emit('list', list)
-}
-
-/*****************************************************
  * ADD to FireBase
- ****************************************************/
+ *****************************************************/
 // Handle the opperations
 function handleAdd(req, res) {
    // get the info from the query
@@ -40,15 +23,6 @@ function handleAdd(req, res) {
 
    // add to the database
    addStudent(name, theClass, details)
-
-   // notify and update page via AJAX
-   var list = new Array()
-   ref.on('child_added', (snapshot) => {
-      list.push(snapshot.val())
-   })
-
-   // send updated list to the folks
-   res.end(JSON.stringify(list))
 }
 
 // Add a student to the queue
@@ -67,37 +41,17 @@ function addStudent(name, theClass, details) {
 // Handle Removing
 function handleRemove(req, res) {
    var id = req.query.id
-   console.log("Remove id: " + id)
-   removeStudent(id, (err, list) => {
-      if (!err) {
-         res.end(JSON.stringify(list))
-      } else {
-         console.log(err)
-      }
-   })
+   removeStudent(id)
 }
 
 // Remove a student
-function removeStudent(id, callback) {
+function removeStudent(id) {
    var path = '/'
    getKey(id, key => {
       path += key
 
-      console.log(path)
-
       var sref = db.ref('/queue' + path)
-      sref.remove().then(() => {
-         var list = []
-         ref.once('value', snap => {
-            snap.forEach(data => {
-               list.push(data.val())
-            })
-            console.log(list)
-            callback(null, list)
-         })
-      }, () => {
-         callback("Failed to remove " + id + " from queue", null)
-      })
+      sref.remove()
    })
 }
 
@@ -110,7 +64,6 @@ function getKey(id, callback) {
    var keys = []
    ref.once('value', snap => {
       snap.forEach(data => {
-         console.log(data.key)
          keys.push(data.key)
       })
       callback(keys[id])
@@ -121,13 +74,12 @@ function getKey(id, callback) {
  * PULL from FireBase
  ****************************************************/
 // Start up: pull everything at once
-function startUp(callback) {
+function startUp() {
    ref.once('value', snapshot => {
       var list = []
       snapshot.forEach((data) => {
          list.push(data.val())
       })
-      callback(list)
    })
 }
 
@@ -139,24 +91,11 @@ function handleAddTa(req, res) {
    var link = req.query.ta
    var id = req.query.id
 
-   updateTa(id, link, (err) => {
-      if (!err) {
-         ref.once('value', snap => {
-            var list = []
-            snap.forEach(data => {
-               list.push(data.val())
-            })
-            console.log("Updated TA")
-            res.end(JSON.stringify(list))
-         })
-      } else {
-         console.log(err)
-      }
-   })
+   updateTa(id, link)
 }
 
 // add a ta
-function updateTa(id, link, callback) {
+function updateTa(id, link) {
    getKey(id, key => {
       const sref = db.ref('/queue/' + key)
 
@@ -164,10 +103,9 @@ function updateTa(id, link, callback) {
          ta: link
       }, (err) => {
          if (!err) {
-            callback(null)
+            console.log("Successful Update")
          } else {
             console.log(err)
-            callback("Failed to Update the TA")
          }
       })
    })
@@ -178,6 +116,5 @@ function updateTa(id, link, callback) {
 module.exports = {
    addStudent: handleAdd,
    removeStudent: handleRemove,
-   start: startUp,
    addTa: handleAddTa
 }

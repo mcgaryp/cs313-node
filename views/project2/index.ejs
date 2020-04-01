@@ -8,11 +8,7 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
    <script src="https://kit.fontawesome.com/79ad9f74b9.js" crossorigin="anonymous"></script>
-   <script src="node_modules/socket.io-client/dist/socket.io.js"></script>
-   <script>
-      var socket = io();
-   </script>
-
+   <script src="https://www.gstatic.com/firebasejs/live/3.1/firebase.js"></script>
    <!-- 
         TODO: One the first queue enterence the queue is completely erased and needs to be updates. 
         TODO: Make the website ready to listen for updates on the server. RealTime updates.
@@ -67,20 +63,22 @@
       </div>
 
       <!-- queue -->
-      <div class="row p-1">
-         <table class="table table-responsive">
-            <thead>
-               <tr>
-                  <th scope="col"></th>
-                  <th scope="col">Name</th>
-                  <th scope="col">Class</th>
-                  <th scope="col">Need help with...</th>
-                  <th scope="col">TA Zoom Link</th>
-                  <th scope="col"></th>
-               </tr>
-            </thead>
-            <tbody id="queue"></tbody>
-         </table>
+      <div class="row p-1 justify-content-center">
+         <div class="col">
+            <table class="table table-responsive">
+               <thead>
+                  <tr>
+                     <th scope="col"></th>
+                     <th scope="col">Name</th>
+                     <th scope="col">Class</th>
+                     <th scope="col">Need help with...</th>
+                     <th scope="col">TA Zoom Link</th>
+                     <th scope="col"></th>
+                  </tr>
+               </thead>
+               <tbody id="queue"></tbody>
+            </table>
+         </div>
       </div>
 
       <hr>

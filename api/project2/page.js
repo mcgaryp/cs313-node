@@ -1,32 +1,49 @@
-var ERROR = "There was an error.";
-$(document).ready(function () {
-   var target = '/lab-queue/start'
+(function () {
+   // Initialize Firebase
+   const firebaseConfig = {
+      apiKey: "AIzaSyCEEPV8FF0EGdX1rohFvi5lc8ro-786wKA",
+      authDomain: "lab-queue-8afd1.firebaseapp.com",
+      databaseURL: "https://lab-queue-8afd1.firebaseio.com",
+      projectId: "lab-queue-8afd1",
+      storageBucket: "lab-queue-8afd1.appspot.com",
+      messagingSenderId: "333193300445",
+      appId: "1:333193300445:web:6ca24f0f92300e13304e34",
+      measurementId: "G-65SSSF4F4B"
+   };
 
-   $.get(target, res => {
-      var data = null
-      data = JSON.parse(res)
-      renderQueue(data)
-   })
-});
+   // Initialize Firebase
+   firebase.initializeApp(firebaseConfig);
 
-$(document).ready(function () {
-   var form = $('form.addTa').submit(event => {
-      event.preventDefault()
+   console.log(firebase)
+   // Create references
+   const dbRef = firebase.database().ref().child('/queue');
 
-      var id = event.delegateTarget[0].id
-      var ta = event.delegateTarget[0].value
-
-      var target = '/lab-queue/addTa?ta=' + ta + '&id=' + id
-
-      $.get(target, function (res) {
-         var data = null
-         data = JSON.parse(res)
-         renderQueue(data)
+   dbRef.on('value', snap => {
+      var list = []
+      console.log("hello two")
+      snap.forEach(data => {
+         list.push(data.val())
       })
-   })
-});
+      renderQueue(list)
+   });
 
-$(function () {
+   // Pull Immediately
+   $(document).ready(function () {
+      var list = []
+      
+      dbRef.once('value', snap => {
+         console.log(snap)
+         snap.forEach((data) => {
+            list.push(data.val())
+         })
+         renderQueue(list)
+      })
+   });
+
+}());
+
+// Add a Atudent the DB
+$(document).ready(function () {
    var form = $('#add')
    var name = $('#name')
    var theClass = $('#class')
@@ -37,16 +54,12 @@ $(function () {
 
       var target = '/lab-queue/addPerson?name=' + name.val() + '&class=' + theClass.val() + '&details=' + details.val()
 
-      $.get(target, function (res) {
-         var data = null
-         data = JSON.parse(res)
-         renderQueue(data)
-         form.trigger("reset")
-      })
+      $.get(target)
+      form.trigger("reset")
    })
 });
 
-
+// Render the Queue
 function renderQueue(queue) {
    var text = ""
    if (queue != null) {
@@ -58,6 +71,7 @@ function renderQueue(queue) {
    }
 }
 
+// Make the Queue
 function makeText(c, details, name, ta, i) {
    var text = "<tr class='rowData'"
    if (ta) {
@@ -73,12 +87,13 @@ function makeText(c, details, name, ta, i) {
    }
 
    text += "</td><td><form class='delete' action='/lab-queue/removePerson'><div class='form-row'><input id='" + i + "' hidden><button class='btn btn-danger' type='submit' name='delete'><i class='fas fa-trash'></i></button></div></form></td></tr>"
-   
+
    return text
 }
 
+// Refresh the functions
 function load() {
-   // Update TA table
+   // Update TA DB
    $('form.addTa').submit(event => {
       event.preventDefault()
 
@@ -87,11 +102,7 @@ function load() {
 
       var target = '/lab-queue/addTa?ta=' + ta + '&id=' + id
 
-      $.get(target, function (res) {
-         var data = null
-         data = JSON.parse(res)
-         renderQueue(data)
-      })
+      $.get(target)
    })
 
    // Update deletion
@@ -101,33 +112,29 @@ function load() {
       var id = event.delegateTarget[0].id
 
       var target = '/lab-queue/removePerson?id=' + id
-      $.get(target, function (res) {
-         var data = null
-         data = JSON.parse(res)
-         renderQueue(data)
-      })
+      $.get(target)
    })
 
 }
 
 resizeWindow()
 
-      $(window).resize(() => {
-         resizeWindow()
-      });
+$(window).resize(() => {
+   resizeWindow()
+});
 
-      function resizeWindow() {
-         if ($(window).width() <= 700) {
-            $('.enterCol').removeClass('col')
-            $('.enterCol').addClass('col-12')
-            $('.enterButton').removeClass('col-auto')
-            $('.enterButton').addClass('col-12')
-         }
+function resizeWindow() {
+   if ($(window).width() <= 700) {
+      $('.enterCol').removeClass('col')
+      $('.enterCol').addClass('col-12')
+      $('.enterButton').removeClass('col-auto')
+      $('.enterButton').addClass('col-12')
+   }
 
-         if ($(window).width() > 700) {
-            $('.enterCol').removeClass('col-12')
-            $('.enterCol').addClass('col')
-            $('.enterButton').removeClass('col-12')
-            $('.enterButton').addClass('col-auto')
-         }
-      }
+   if ($(window).width() > 700) {
+      $('.enterCol').removeClass('col-12')
+      $('.enterCol').addClass('col')
+      $('.enterButton').removeClass('col-12')
+      $('.enterButton').addClass('col-auto')
+   }
+}
